@@ -1,0 +1,53 @@
+Implementation changes:
+
+9/6/16: setting up git repository. Source control will make things easier to fix if I break functionality
+4/3/14: reorganized project structure. Various string utilities are now grouped by function in their 	own source files.
+3/30/14: kluasm code is just plain kludgy and unmaintainable. Breaking ParseFile into functions 	breaks ParseFile. Let's try to refactor from the bottom up one change at a time. Reverting 
+	to version 1.1 file.
+3/28/14: adding new functions based on grammar rules to reduce function length and improve 	intelligibility. Not compile ready yet. :(
+3/28/14: revised makefile and put declared global variables into asmdefs.c
+4/12: Added multiple declaration per line support. Appears to work.
+Try testing now to get things to work (wok) right.
+4/10: Hooked GetEscCharData into PrintData
+4/10: Hooked EscCharCheck into Parsefile
+4/10: Added additional utility functions EscCharCheck( ) GetEscCharData( ) PrintEscSeq( ) and 	PrintSanitized( ) for escaped character support. Works fine too. 8)
+4/10: outToCode writes strings to file
+4/8: Fixed string verification in ParseFile. Increments address correctly now.
+4/7: Added string verification to ParseFile
+4/7: Bug with comments following halt instruction popped up again. I fixed the if statement causing 	the problem
+4/7: Code trimming. Removed about 100 lines of padding from kluasm.c saved as kluasm_v1.1.c
+3/16: Fixed bug in Parsefile that caused any lines starting with comments ending with  
+	colons to be mistaken for labels
+3/15: Fixed bug in Parsefile that caused a error report when the parser encountered comments	following a halt instruction
+3/15: Added displacement support to addressing 
+	load [label+const] now works
+3/15: Fixed LabelCheck function. Does what it's supposed to now: excludes labels starting with 	numbers and labels containing illegal characters.
+3/14: Fixed incorrect printout of label substitutes in outToCode instruction parsing to
+	keep sign extension from corrupting the opcode
+3/14: Added StripIndexSuffix to clean up constants/labels for parsing.
+	The assembler appears to support indexed mode! YAY!
+3/14: Added isIndArg function to test for indexed mode
+3/14: Revised StripBracket function. Modifies one argument instead of copying data
+3/13: Added long value support to dataDeclaration expressions. now writes qwords and paras
+3/13: Fixed isDecimal. Now recognizes negative numbers
+3/13: Added PrintData stub intended to wrap data printing functionality
+3/13: *Deprecated* Added an2h to print long number strings to a multibyte integer array
+3/13: Added constant declaration support to ParseFile label section
+3/13: Added PrintComment routine to fix comment cutoff bug
+3/13: Redid syntax so jumps work right. Fixed code in ParseFile instruction section and rewrote	isConstArg isMemArg and isPtrArg
+3/13: Moved code section in Parsefile instruction argument section
+	symbol resolution is now outside of isMemArg and isPtrArg to remove code duplication
+3/13: Added data type checking to instruction and data declaration sections in OutToCode routine
+3/13: File is getting unmanageable I'm splitting it into modules
+ParseFile routine now builds a symbol Table and works fine.
+Finished PrintSymbolTable routine
+added a StripBrackets routine
+Finished up instruction parsing for 1st pass. It prints out errors correctly. I'm happy. :)
+Fleshed out isMemArg and isPtrArg functions. They work!
+Added isXarg stubs for memory constant and pointer arguments
+Added code to ParseFile to evaluate data declaration expressions
+Added code to ParseFile to fully evaluate Label expressions
+Added isX functions to check for category type
+Added label checking code to file parser
+Added code to receive command line options and open files for I/O
+
